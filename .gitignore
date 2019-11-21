@@ -1,0 +1,5 @@
+# Local data
+data/
+
+# Node
+node_modules/
