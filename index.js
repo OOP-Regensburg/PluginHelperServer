@@ -4,21 +4,13 @@ const HTTP_ERROR = 400,
   HTTP_INTERNAL_ERROR = 500,
   SERVER_PORT = 9999,
   fs = require("fs"),
-  https = require("https"),
   express = require("express"),
   fileUpload = require("express-fileupload"),
   app = express();
 
-var server;
-
 app.use(fileUpload());
 app.post("/upload", handleUpload);
-
-server = https.createServer({
-  key: fs.readFileSync("./certs/server.key"),
-  cert: fs.readFileSync("./certs/server.cert"),
-}, app);
-server.listen(SERVER_PORT);
+app.listen(SERVER_PORT);
 
 function handleUpload(request, response) {
   if (!request.files || Object.keys(request.files).length === 0) {
